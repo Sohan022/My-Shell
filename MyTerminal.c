@@ -16,9 +16,7 @@
 #define KYEL  "\x1B[33m"
 #define KWHT  "\x1B[37m"
 
-/* Splits the string by space and returns the array of tokens
- *
- */
+
 char **tokenize(char *line)
 {
 	char **tokens = (char **)malloc(MAX_NUM_TOKENS * sizeof(char *));
@@ -136,8 +134,7 @@ int main(int argc, char* argv[]) {
 			scanf("%[^\n]", line);
 			getchar();
 		}
-		// printf("Command entered: %s (remove this debug output later)\n", line);
-		/* END: TAKING INPUT */
+		
 
 		line[strlen(line)] = '\n'; //terminate with new line
 		tokens = tokenize(line);
@@ -151,7 +148,7 @@ int main(int argc, char* argv[]) {
 			++j;
 		}
 		char ***pTokens; 
-		//do whatever you want with the commands, here we just print the
+		
 		if(tokens[0] == NULL){
 			continue;
 		}
@@ -207,11 +204,7 @@ int main(int argc, char* argv[]) {
 		else if(strcmp(tokens[0],"rm")==0){
 			remove(tokens[1]);
 		}
-		// else if(strcmp(tokens[0],"sleep")==0){
-		// 	int time;
-		// 	sscanf(tokens[1],"%d",&time);
-		// 	sleep(time);
-		// }
+		
 		else if(strcmp(tokens[0],"echo")==0){
 			i = 1;
 			while(tokens[i]!=NULL){
@@ -220,29 +213,7 @@ int main(int argc, char* argv[]) {
 			}
 			printf("\n");
 		}
-		// else if(strcmp(tokens[2],"|")==0){
-		// 	char line3[200];
-		// 	memset(line3,0,sizeof(line3));
-		// 	FILE *fr = fopen(tokens[1],"r");
-		// 	//FILE *fw = fopen("sample.txt", "w"); 
-		// 	if(fr == NULL){
-		// 		perror("File not find");
-		// 	}
-		// 	else if(strcmp(tokens[3],"grep")){
-		// 		while (fgets(line3, sizeof(line3), fr)) {
-		// 		   if (strstr(line3, tokens[4])) {
-		// 		   		printf("%s",line3);
-		// 		   }
-		// 		   memset(line3,0,sizeof(line3));
-		// 		}
-		// 	} else{
-		// 		FILE *fw = fopen(tokens[3],"w");
-		// 		while(fgets(line3,sizeof(line3),fr)){
-		// 			fprintf(fw,"%s\n",line3);
-		// 		}
-		// 	}
-
-		// }
+		
 		else if(strcmp(tokens[0],"cat")==0){
 			int f = open(tokens[1],O_RDONLY);
 			char c;
@@ -257,27 +228,8 @@ int main(int argc, char* argv[]) {
 			}
 			printf("\n");
 		}
-		// else if(strcmp(tokens[0],"grep")==0){
-		// 	char line2[200];
-		// 	memset(line,0,sizeof(line2));
-		// 	FILE *file = fopen(tokens[2],"r");
-		// 	if(file == NULL){
-		// 		perror("File not find");
-		// 	}
-		// 	else{
-		// 		while (fgets(line2, sizeof(line2), file)) {
-		// 		   if (strstr(line2, tokens[1])) {
-		// 		   		printf("%s",line2);
-		// 		   }
-		// 		   memset(line,0,sizeof(line2));
-		// 		}
-		// 	}
-			
-		// }
-
 		
 		else {
-			//execlp("vi","vi","1.txt",NULL);
 			int n = 0;
 			while(tokens[n]){
 				n++;
@@ -301,18 +253,7 @@ int main(int argc, char* argv[]) {
 				execvp(tokens[0],tokens);
 			}
 		}
-		// for(i=0;tokens[i]!=NULL;i++){
-		// 	printf("found token %s (remove this debug output later)\n", tok
-
 		
-		
-		// for(i=0;tokens[i]!=NULL;i++){
-		// 	printf("found token %s (remove this debug output later)\n", tokens[i]);
-		// }
-
-		// Freeing the allocated memory	
-		// }
-		// Freeing the allocated memory	
 		for(i=0;tokens[i]!=NULL;i++){
 			free(tokens[i]);
 		}
